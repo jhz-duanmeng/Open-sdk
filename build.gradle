@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+task makeLibrary(type:Jar) {
+    //指定生成的jar名
+    baseName 'controllibrary'
+    //从哪里打包class文件
+    from('build/intermediates/classes/release/com/ren001/library/control/')
+    //打包到jar后的目录结构
+    into('com/ren001/library/control/')
+    //去掉不需要打包的目录和文件
+    exclude( 'BuildConfig.class', 'R.class')
+    //去掉R$开头的文件
+    exclude{ it.name.startsWith('R$');}
+}
