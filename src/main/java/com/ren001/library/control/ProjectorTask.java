@@ -101,7 +101,7 @@ public class ProjectorTask extends Task {
         try {
             JSONObject mJSONObject = new JSONObject();
             mJSONObject.put("order", "keystoneCorrection");
-            mJSONObject.put("value", "angle");
+            mJSONObject.put("value", angle);
             executeTask(mJSONObject);
         } catch (JSONException e) {
             e.printStackTrace();
