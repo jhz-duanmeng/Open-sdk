@@ -140,6 +140,14 @@ public class RobotReceiverAction {
     /* 命令广播 值为int类型 为 0 时执行跳舞  为 -1 时停止 */
     public final static String NAME_DANCE_ORDER = "order";
 
+    /**
+     * 机器动作组
+     */
+    public final static String DANCE_GROUP_TASK = "com.ren001.robot.action.GROUP_TASK";
+    public final static String NAME_GROUP_TASK = "data";
+    /* 命令广播 值为int类型 为 0 时执行、  为 -1 时停止 */
+    public final static String NAME_GROUP_TASK_ORDER = "order";
+
 
     /**
      * 机器人头顶按钮
