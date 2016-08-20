@@ -3,3 +3,5 @@ mvp框架library
 cd library-controllibrary     //进入到编译的Module
 gradle build        //编译Module
 gradle makeLibrary
+
+测试你好
