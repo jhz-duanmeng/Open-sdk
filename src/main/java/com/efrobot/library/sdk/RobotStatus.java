@@ -1,4 +1,4 @@
-package com.efrobot.library;
+package com.efrobot.library.sdk;
 
 
 
