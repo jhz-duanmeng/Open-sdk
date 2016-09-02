@@ -1,14 +1,16 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 19
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 1
-        versionName “1.2”
+        targetSdkVersion 23
+        versionCode 91
+        versionName "0.0.91"
     }
     buildTypes {
         release {
@@ -18,19 +20,38 @@ android {
     }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
 }
 
-task makeLibrary(type:Jar) {
-    //指定生成的jar名
-    baseName 'controllibrary'
-    //从哪里打包class文件
-    from('build/intermediates/classes/release/com/ren001/library/control/')
-    //打包到jar后的目录结构
-    into('com/ren001/library/control/')
-    //去掉不需要打包的目录和文件
-    exclude( 'BuildConfig.class', 'R.class')
-    //去掉R$开头的文件
-    exclude{ it.name.startsWith('R$');}
+artifacts {
+    archives androidSourcesJar
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.efrobot.library:ros:0.0.6'
+//    compile project(':library-ros')
+}
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+
+        repository(url: 'http://101.201.73.113:8081/nexus/content/repositories/releases/') {//仓库地址
+            authentication(userName: "admin",//用户名
+                    password: "@Robot321!@#")//密码
+        }
+
+        pom.project {
+            name 'juude-library'
+            packaging 'aar'
+            description 'none'
+            url 'http://101.201.73.113:8081/nexus/content/repositories/releases/'//仓库地址
+            groupId "com.efrobot.library.sdk"
+            artifactId "sdk"
+            version android.defaultConfig.versionName
+        }
+    }
 }
