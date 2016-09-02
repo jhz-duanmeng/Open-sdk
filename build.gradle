@@ -32,6 +32,7 @@ artifacts {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.efrobot.library:ros:0.0.6'
+    compile 'com.efrobot.library.net:mvpnetlibrary:0.0.29'
 //    compile project(':library-ros')
 }
 
